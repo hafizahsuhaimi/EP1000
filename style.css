@@ -1,0 +1,79 @@
+body{
+	background-color: #EEE;
+	font-family: Source Code Pro Medium;
+}
+
+a {
+	text-decoration: none;
+	color: #51777c;
+}
+
+h1,h2,h3 { 
+	margin: 0;
+ }
+
+ h2{
+  	font-weight: bold;
+  	font-size: 25px;
+ }
+
+h3{
+	font-weight: bold;
+	font-size: 25px;
+}
+#container {
+	background-color: white;
+	width: 1200px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#header {
+	background-color: #698561;
+	color: #f9f9ea;
+	text-align: center;
+	padding: 30px;
+	font-size: 40px;
+	font-weight: bold;
+}
+
+#content {
+	padding: 20px;
+	font-size: 15;
+}
+
+img {
+	float:left
+}
+
+#nav {
+	width: 180px;
+	float: left;
+	font-weight: bold;
+	font-size: 20;
+	padding: 20;
+}
+
+#nav ul{
+	list-style-type: none;
+	padding: 0;
+}
+
+#main li{
+	margin: 1em 0;
+}
+
+#main {
+	width: 900px;
+	float: right;
+	padding: 20;
+}
+
+#footer {
+	clear: both;
+	background-color: #97a78a;
+	color: white;
+	text-align: right;
+	padding: 20px;
+}
+

@@ -1,6 +1,9 @@
 body{
 	background-color: #EEE;
 	font-family: Source Code Pro Medium;
+	@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@500&display=swap');
+</style>
+
 }
 
 a {

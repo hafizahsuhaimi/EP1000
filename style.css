@@ -1,7 +1,9 @@
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@500&display=swap" rel="stylesheet">
+
 body{
 	background-color: #EEE;
-	font-family: @import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@500&display=swap');
-</style>;
+	font-family: font-family: 'Source Code Pro', monospace;
 
 }
 

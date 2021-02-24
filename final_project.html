@@ -1,0 +1,250 @@
+<html>
+	<head>
+		<title>My Website</title>
+		<link rel="stylesheet" type="text/css" href="style.css" />
+	</head>
+	<body>
+		<div id="container">
+			<div id="header">
+				<h1>MY WEBSITE</h1>
+			</div>
+			<div id="content">
+				<div id="nav">
+					<h3>Navigation</h3>
+					<ul>
+						<li><a href="index.html">Home</a></li>
+						<br>
+						<li><a href="about.html">About</a></li>
+						<br>
+						<li><a href="contact.html">Contact</a></li>
+						<br>
+						<li><a href="safety.html">Safety</a></li>
+						<br>
+						<li><a href="prototyping.html">Prototyping</a></li>
+						<br>
+						<li><a href="webdev.html">Web Development</a></li>
+						<br>
+						<li><a href="vercontrol.html">Version Control</a></li>
+						<br>
+						<li><a href="f360.html">Fusion 360</a></li>
+						<br>
+						<li><a href="3dprinting.html">3D Printing</a></li>
+						<br>
+						<li><a href="final_project">Final Project</a></li>
+					</ul>
+				</div>
+
+				<div id="main">
+					<h2>Heart Mood Lamp</h2>
+				<p>For my final project, I have decided to do a mood lamp. I wanted a light that was useful and also looks nice to be placed in someone's room.</p>
+
+					<h3>Planning</h3>
+
+				<table style="width: 100%">
+					<tr>
+					<td> <p>I first looked around Instructables to find insporation on how I wante to do my mood lamp. I was then inspired by this <a href= "https://www.instructables.com/Mood-Lamp-1/">post</a> on Instructables.</p>
+						<p> I decided to do a mood lamp where the light can shine onto the wall to give a nice light projection from the shape of the frame. I then tweaked the design by changing the shape of the top, which then I decided to do a heart shape top as I thought it would be nice to have a heart shape projection on the wall.</p>
+					</td>
+					<td>  <img src="inspo.png" width="320" style="float:right; padding-left:20;"> </td>
+					</tr>
+				</table>
+				<p>After I have decided what to do, I designed it in Fusion 360. Below is how my lamp will look like. As you can see, There will be an area at the back for my to place my LED strip so that it can shine onto the wall. There are also holes at the base of the heart to allow me to insert the screw to join the heart and the base together. I also allowed holes for the LED strip to pass through and also the USB cable to connect to my power source.</p>
+				
+				<p><iframe src="https://ichat1304.autodesk360.com/shares/public/SH56a43QTfd62c1cd968b9acff043f7e4fbe?mode=embed" width="640" height="480" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true"  frameborder="0" style="padding-left:115;"></iframe></p>
+
+					<h3>3D Printing</h3>
+
+				<p>For the top part, I have decided to 3D print it. For this size of print, it actually took very long, even after adjusting the settings. It took around 4hr 30min to print it. For the first try, there was actually a problem with the 3D printer where it did not heat up properly, causing it to be very uneven on one side. </p> 
+
+				<table style="width: 100%">
+					<tr>
+					<td> <img src="print1.png" width="430">
+					</td>
+					<td>  <img src="print2.png" width="430"> </td>
+					</tr>
+				</table>
+
+					<p> After I tried again the next day, it came out really nice and even. I was very satisfied as the heart was very solid, even though some settings were changed at Cura to make it print at a faster timing. You can view the final heart piece at the bottom where I showed my finished product!</p>
+
+					<h3>Laser Cutting</h3>
+				<p> For my base, I laser cut the ply wood to make my base. I sketched the parameter box as seen in (link to laser cutting) as well. As you can see, this was how the pieces turned out after cutting. </p>
+
+				<table style="width: 100%">
+					<tr>
+					<td> <img src="lasercut.png" width="430">
+					</td>
+					<td>  <img src="lasercut1.png" width="430"> </td>
+					</tr>
+					<tr>
+					<td> On the right is how the pieces looked assembled. Due to the thorough planning and calculations before, I was happy that the pieces all fit perfectly and snug. As you can see, there are the holes on top for the screws and for the LED strip to enter the heart piece.
+					</td>
+					<td>  <img src="lasercut2.png" width="380" style="float:right; padding-right:30; padding-top:20;"> </td>
+					</tr>
+				</table>
+
+					<h3>Embedded Programming</h3>
+
+					<table style="width: 100%">
+					<tr>
+					<td> <p> My product makes use of a button as a input device and the LED strip as an output device. Working with the LED strip was relatively simple and easy to operate. On the right was how I connected the button and the LED strip to the Arduino UNO and the breadboard.</p>
+					</td>
+					</tr>
+					<tr>
+					<td> <img src="code1.png" width="600" style="padding-left:130; padding-top:20;"></td>
+					</tr>
+					<tr>
+					<td style="padding-bottom:20; padding-top:20;"> Below is how my code on Arduino looks like. I referenced this from Adafruit's 'buttoncycler'. I changed the colour of my choice in each sequence. In my code, there are a total of 8 cases, where everytime I click the button, the LED strip will change colour to the next one.</td>
+					</tr>
+					<tr>
+					<td style="border:1px; border-style:solid; border-color: black; padding:10; font-size: 14px";> <pre><code> #include < Adafruit_NeoPixel.h >
+#ifdef __AVR__
+ #include < avr/power.h > // Required for 16 MHz Adafruit Trinket
+#endif
+
+#define BUTTON_PIN   2
+
+#define PIXEL_PIN    9  // Digital IO pin connected to the NeoPixels.
+
+#define PIXEL_COUNT 15  // Number of NeoPixels
+
+Adafruit_NeoPixel strip(PIXEL_COUNT, PIXEL_PIN, NEO_GRB + NEO_KHZ800);
+
+boolean oldState = HIGH;
+int     mode     = 0;    // Currently-active animation mode, 0-9
+
+void setup() {
+  pinMode(BUTTON_PIN, INPUT_PULLUP);
+  strip.begin(); // Initialize NeoPixel strip object (REQUIRED)
+  strip.show();  // Initialize all pixels to 'off'
+}
+
+void loop() {
+  // Get current button state.
+  boolean newState = digitalRead(BUTTON_PIN);
+
+  // Check if state changed from high to low (button press).
+  if((newState == LOW) && (oldState == HIGH)) {
+    // Short delay to debounce button.
+    delay(20);
+    // Check if button is still low after debounce.
+    newState = digitalRead(BUTTON_PIN);
+    if(newState == LOW) {      // Yes, still low
+      if(++mode > 8) mode = 0; // Advance to next mode, wrap around after #12 
+      switch(mode) {           // Start the new animation...
+        case 0:
+          colorWipe(strip.Color(  0,   0,   0), 50);    // Black/off
+          break;
+        case 1:
+          colorWipe(strip.Color(255,   0,   0), 50);    // Red
+          break;
+        case 2:
+          colorWipe(strip.Color(  255,   0, 255), 50);    // Magenta
+          break;
+        case 3:
+          colorWipe(strip.Color(128, 0, 255), 50); // Violet
+          break;
+        case 4:
+          colorWipe(strip.Color(0,   0,   255), 50); // Blue
+          break;
+        case 5:
+          colorWipe(strip.Color(  0,   255, 255), 50); // Cyan
+          break;
+        case 6:
+          colorWipe(strip.Color(  0,   255, 128), 50); // Spring Green
+          break;
+        case 7:
+          colorWipe(strip.Color(  255,   128, 0), 50); // Orange
+          break;
+        case 8:
+          rainbow(10);
+          break;
+        
+      }
+    }
+  }
+
+  // Set the last-read button state to the old state.
+  oldState = newState;
+}
+
+void colorWipe(uint32_t color, int wait) {
+  for(int i=0; i< strip.numPixels(); i++) { // For each pixel in strip...
+    strip.setPixelColor(i, color);         //  Set pixel's color (in RAM)
+    strip.show();                          //  Update strip to match
+    delay(wait);                           //  Pause for a moment
+  }
+}
+
+void theaterChase(uint32_t color, int wait) {
+  for(int a=0; a<10; a++) {  // Repeat 10 times...
+    for(int b=0; b<3; b++) { //  'b' counts from 0 to 2...
+      strip.clear();         //   Set all pixels in RAM to 0 (off)
+      // 'c' counts up from 'b' to end of strip in steps of 3...
+      for(int c=b; c< strip.numPixels(); c += 3) {
+        strip.setPixelColor(c, color); // Set pixel 'c' to value 'color'
+      }
+      strip.show(); // Update strip with new contents
+      delay(wait);  // Pause for a moment
+    }
+  }
+}
+
+void rainbow(int wait) {
+  for(long firstPixelHue = 0; firstPixelHue < 3*65536; firstPixelHue += 256) {
+    for(int i=0; i< strip.numPixels(); i++) { // For each pixel in strip...
+      int pixelHue = firstPixelHue + (i * 65536L / strip.numPixels());
+      strip.setPixelColor(i, strip.gamma32(strip.ColorHSV(pixelHue)));
+    }
+    strip.show(); // Update strip with new contents
+    delay(wait);  // Pause for a moment
+  }
+}
+</code></pre> 
+</td>
+					</tr>
+				</table>
+
+				<h3 style="padding-top:20;">Assembling</h3>
+
+				<table style="width: 100%">
+					<tr>
+					<td> I used M3 screws and nuts to hold both pieces together. I then used double-sided tape to stick my LED strips onto the heart piece. This is how my setup looked like, with my Arduino UNO in the boxand the button and LED strip being projected up into the top piece. I soldered wires onto my button so that it will be longer. I also soldered 2 LED strips together as I needed the strip to cover the whole heart shape. Soldering was very tough for me but i got the hang of it and managed to solder the button and LED strips successfully.
+					</td>
+					<td>  <img src="finalproduct2.png" width="330" style="float:right; padding-right:40; padding-top:20;"> </td>
+					</tr>
+				</table>
+
+				<h3>The Finished Product</h3>
+
+				<p> This is how the finished product looks like! Overall, I am very satisfied that everything works and I am happy that it looks very pretty when being light up. </p>
+
+				<p> <img src="finalproduct1.png" width="600" style="padding-left:130; padding-top:20;"></p>
+					
+				<table style="width: 100%">
+					<tr>
+					<td style="padding-top:20;"> <p> Below, you can view how the light looks like when being light up. You can see that it creates a light pattern on the wall.</p>
+					</td>
+					</tr>
+					<tr>
+					<td>  <iframe width="600" height="315" src="https://www.youtube.com/embed/l_Ss7IrA-8o?start=44" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="padding-left:130; padding-top:20;"></iframe> </td>
+					</tr>
+				</table>
+
+				<h3>Conclusion</h3>
+
+					<p> Things I would change/do better next time:</p>
+					<ul>
+					<li> <mark>Top part</mark>: Since 3D printing takes too long, I would use laser cutting to produce the heart shape as it takes shoter to produce. Using laser cutting will also make the heart more solid as now, you can actuslly see the shadow of the infill inside when being lit up.
+					<li> <mark>Code</mark>: I would come up with a different setting where the colours would just run by itself without me pressing the button everytime. Since I am still uinexperienced with coding, I can do a more complex code next time
+					<li> <mark>Choice of output</mark>: Using a button might be too simple, I can change the output to maybe a ultrasensor or a potentiometer next time and make the project more complex.
+					</ul></p>
+					<p> <img src="presentation.png" width="600" style="padding-left:130; padding-top:20;"></p>
+				
+				</div>
+			</div>
+			<div id="footer">
+				Copyright &copy; 2020 Nurul Hafizah
+			</div>		
+		</div>
+	</body>
+</html>

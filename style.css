@@ -11,7 +11,7 @@ a {
 	color: #51777c;
 }
 
-h1,h2,h3 { 
+h1,h2,h3,h4 { 
 	margin: 0;
  }
 
@@ -24,6 +24,9 @@ h3{
 	font-weight: bold;
 	font-size: 25px;
 }
+h4{
+	font-weight: bold;
+	font-size: 20px;
 #container {
 	background-color: white;
 	width: 1200px;
